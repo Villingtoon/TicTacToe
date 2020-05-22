@@ -43,13 +43,19 @@ namespace TicTacToe
 
             if (player1 == true)
             {
-                label.Text = "X";
-                player1 = false;
+                if (label.Text == string.Empty)
+                {
+                    label.Text = "X";
+                    player1 = false;
+                }
             }
-            else
+            if (player1 == false)
             {
-                label.Text = "O";
-                player1 = true;
+                if (label.Text == string.Empty)
+                {
+                    label.Text = "O";
+                    player1 = true;
+                }
             }
         }
     }
