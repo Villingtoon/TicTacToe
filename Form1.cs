@@ -13,6 +13,7 @@ namespace TicTacToe
     public partial class TicTacToe : Form
     {
         bool player1 = true;
+        int turnCount = 0;
         public TicTacToe()
         {
             InitializeComponent();
@@ -33,7 +34,9 @@ namespace TicTacToe
             {
                 labelName = "label" + i;
                 Grid.Controls[labelName].Text = string.Empty;
+                Grid.Controls[labelName].BackColor = Color.LightCoral;
             }
+            turnCount = 0;
         }
 
         private void Player_Click(object sender, EventArgs e)
@@ -46,7 +49,7 @@ namespace TicTacToe
                 if (label.Text == string.Empty)
                 {
                     label.Text = "X";
-                    player1 = false;
+                    turnCount += 1;
                 }
             }
             if (player1 == false)
@@ -54,9 +57,102 @@ namespace TicTacToe
                 if (label.Text == string.Empty)
                 {
                     label.Text = "O";
-                    player1 = true;
+                    turnCount += 1;
                 }
             }
+            PlaySound();
+            CheckForWin();
+            CheckForDraw();
+            player1 = !player1;
+
+        }
+
+        private void CheckForWin()
+        {
+            if ((label1.Text == label2.Text && label2.Text == label3.Text && label1.Text != string.Empty) ||
+                (label4.Text == label5.Text && label5.Text == label6.Text && label4.Text != string.Empty) ||
+                (label7.Text == label8.Text && label8.Text == label9.Text && label7.Text != string.Empty) ||
+                (label1.Text == label4.Text && label4.Text == label7.Text && label1.Text != string.Empty) ||
+                (label2.Text == label5.Text && label5.Text == label8.Text && label2.Text != string.Empty) ||
+                (label3.Text == label6.Text && label6.Text == label9.Text && label3.Text != string.Empty) ||
+                (label3.Text == label5.Text && label5.Text == label7.Text && label3.Text != string.Empty) ||
+                (label1.Text == label5.Text && label5.Text == label9.Text && label1.Text != string.Empty))
+            {
+                GameOver();
+            }
+        }
+
+        private void WinnerCellsChangeColor()
+        {
+            if (label1.Text == label2.Text && label1.Text == label3.Text && label1.Text != "")
+            {
+                ChangeCellColors(label1, label2, label3, Color.Lime);
+            }
+            else if (label4.Text == label5.Text && label4.Text == label6.Text && label4.Text != "")
+            {
+                ChangeCellColors(label4, label5, label6, Color.Lime);
+            }
+            else if (label7.Text == label8.Text && label7.Text == label9.Text && label7.Text != "")
+            {
+                ChangeCellColors(label7, label8, label9, Color.Lime);
+            }
+            else if (label1.Text == label4.Text && label1.Text == label7.Text && label1.Text != "")
+            {
+                ChangeCellColors(label1, label4, label7, Color.Lime);
+            }
+            else if (label2.Text == label5.Text && label2.Text == label8.Text && label2.Text != "")
+            {
+                ChangeCellColors(label2, label5, label8, Color.Lime);
+            }
+            else if (label3.Text == label6.Text && label3.Text == label9.Text && label3.Text != "")
+            {
+                ChangeCellColors(label3, label6, label9, Color.Lime);
+            }
+            else if (label1.Text == label5.Text && label1.Text == label9.Text && label1.Text != "")
+            {
+                ChangeCellColors(label1, label5, label9, Color.Lime);
+            }
+            else if (label3.Text == label5.Text && label3.Text == label7.Text && label3.Text != "")
+            {
+                ChangeCellColors(label3, label5, label7, Color.Lime);
+            }
+
+        }
+
+        private void PlaySound()
+        {
+
+        }
+
+        private void GameOver()
+        {
+            string winner = string.Empty;
+            if (player1)
+            {
+                winner = "X";
+            }
+            if (!player1)
+            {
+                winner = "O";
+            }
+            WinnerCellsChangeColor();
+            MessageBox.Show(winner + " wins!");
+            InitializeCells();
+        }
+        private void CheckForDraw()
+        {
+            if(turnCount == 9)
+            {
+                MessageBox.Show("Draw!");
+                InitializeCells();
+            }
+        }
+
+        private void ChangeCellColors(Label labelFirst, Label labelSecond, Label labelThird, Color color)
+        {
+            labelFirst.BackColor = color;
+            labelSecond.BackColor = color;
+            labelThird.BackColor = color;
         }
     }
 }
