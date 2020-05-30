@@ -60,7 +60,7 @@ namespace TicTacToe
                     turnCount += 1;
                 }
             }
-            PlaySound();
+            PlaySound("click_sound");
             CheckForWin();
             CheckForDraw();
             player1 = !player1;
@@ -119,9 +119,11 @@ namespace TicTacToe
 
         }
 
-        private void PlaySound()
+        private void PlaySound(string soundName)
         {
-
+            System.IO.Stream str = (System.IO.Stream)Properties.Resources.ResourceManager.GetObject(soundName);
+            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd.Play();
         }
 
         private void GameOver()
