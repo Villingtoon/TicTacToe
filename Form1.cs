@@ -14,6 +14,9 @@ namespace TicTacToe
     {
         bool player1 = true;
         int turnCount = 0;
+        int pictureCounter = 1;
+        PictureBox pic;
+
         public TicTacToe()
         {
             InitializeComponent();
@@ -41,25 +44,28 @@ namespace TicTacToe
 
         private void Player_Click(object sender, EventArgs e)
         {
-            PictureBox pic = (PictureBox)sender;
+            PictureBox picture = (PictureBox)sender;
             //pictureBox1.Tag = "X";
 
             if (player1 == true)
             {
-                if (pic.Tag == string.Empty)
+                if (picture.Tag == string.Empty)
                 {
                     pic.Tag = "X";
-                    turnCount += 1;
+                    pic = picture;
+                    timer1.Start();
                 }
             }
             if (player1 == false)
             {
-                if (pic.Tag == string.Empty)
+                if (picture.Tag == string.Empty)
                 {
                     pic.Tag = "O";
-                    turnCount += 1;
+                    pic = picture;
+                    timer1.Start();
                 }
             }
+            turnCount++;
             PlaySound("click_sound");
             CheckForWin();
             CheckForDraw();
@@ -155,6 +161,30 @@ namespace TicTacToe
             labelFirst.BackColor = color;
             labelSecond.BackColor = color;
             labelThird.BackColor = color;
+        }
+
+        private void Animation()
+        {
+            string turn;
+            string pictureName;
+
+            turn = pic.Tag.ToString();
+            turn = turn.ToLower();
+
+            pictureName = turn + "_frame_0" + pictureCounter.ToString("00");
+            pic.Image = (Image)Properties.Resources.ResourceManager.GetObject(pictureName);
+            pic.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureCounter++;
+            if(pictureCounter > 20)
+            {
+                pictureCounter = 1;
+                timer1.Stop();
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Animation();
         }
     }
 }
