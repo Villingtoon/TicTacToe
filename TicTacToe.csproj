@@ -76,7 +76,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Resources\tictactoe_sprites.zip" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

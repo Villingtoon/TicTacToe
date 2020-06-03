@@ -10,12 +10,13 @@ using System.Windows.Forms;
 
 namespace TicTacToe
 {
+
     public partial class TicTacToe : Form
     {
         bool player1 = true;
         int turnCount = 0;
         int pictureCounter = 1;
-        PictureBox pic;
+        PictureBox pic = null;
 
         public TicTacToe()
         {
@@ -51,8 +52,8 @@ namespace TicTacToe
             {
                 if (picture.Tag == string.Empty)
                 {
-                    pic.Tag = "X";
                     pic = picture;
+                    pic.Tag = "X";
                     timer1.Start();
                 }
             }
@@ -60,8 +61,8 @@ namespace TicTacToe
             {
                 if (picture.Tag == string.Empty)
                 {
-                    pic.Tag = "O";
                     pic = picture;
+                    pic.Tag = "O";
                     timer1.Start();
                 }
             }
@@ -90,35 +91,35 @@ namespace TicTacToe
 
         private void WinnerCellsChangeColor()
         {
-            if (pictureBox1.Tag == pictureBox2.Tag && pictureBox1.Tag == pictureBox3.Tag && pictureBox1.Tag != "")
+            if (pictureBox1.Tag == pictureBox2.Tag && pictureBox1.Tag == pictureBox3.Tag && pictureBox1.Tag != string.Empty)
             {
                 ChangeCellColors(pictureBox1, pictureBox2, pictureBox3, Color.Lime);
             }
-            else if (pictureBox4.Tag == pictureBox5.Tag && pictureBox4.Tag == pictureBox6.Tag && pictureBox4.Tag != "")
+            else if (pictureBox4.Tag == pictureBox5.Tag && pictureBox4.Tag == pictureBox6.Tag && pictureBox4.Tag != string.Empty)
             {
                 ChangeCellColors(pictureBox4, pictureBox5, pictureBox6, Color.Lime);
             }
-            else if (pictureBox7.Tag == pictureBox8.Tag && pictureBox7.Tag == pictureBox9.Tag && pictureBox7.Tag != "")
+            else if (pictureBox7.Tag == pictureBox8.Tag && pictureBox7.Tag == pictureBox9.Tag && pictureBox7.Tag != string.Empty)
             {
                 ChangeCellColors(pictureBox7, pictureBox8, pictureBox9, Color.Lime);
             }
-            else if (pictureBox1.Tag == pictureBox4.Tag && pictureBox1.Tag == pictureBox7.Tag && pictureBox1.Tag != "")
+            else if (pictureBox1.Tag == pictureBox4.Tag && pictureBox1.Tag == pictureBox7.Tag && pictureBox1.Tag != string.Empty)
             {
                 ChangeCellColors(pictureBox1, pictureBox4, pictureBox7, Color.Lime);
             }
-            else if (pictureBox2.Tag == pictureBox5.Tag && pictureBox2.Tag == pictureBox8.Tag && pictureBox2.Tag != "")
+            else if (pictureBox2.Tag == pictureBox5.Tag && pictureBox2.Tag == pictureBox8.Tag && pictureBox2.Tag != string.Empty)
             {
                 ChangeCellColors(pictureBox2, pictureBox5, pictureBox8, Color.Lime);
             }
-            else if (pictureBox3.Tag == pictureBox6.Tag && pictureBox3.Tag == pictureBox9.Tag && pictureBox3.Tag != "")
+            else if (pictureBox3.Tag == pictureBox6.Tag && pictureBox3.Tag == pictureBox9.Tag && pictureBox3.Tag != string.Empty)
             {
                 ChangeCellColors(pictureBox3, pictureBox6, pictureBox9, Color.Lime);
             }
-            else if (pictureBox1.Tag == pictureBox5.Tag && pictureBox1.Tag == pictureBox9.Tag && pictureBox1.Tag != "")
+            else if (pictureBox1.Tag == pictureBox5.Tag && pictureBox1.Tag == pictureBox9.Tag && pictureBox1.Tag != string.Empty)
             {
                 ChangeCellColors(pictureBox1, pictureBox5, pictureBox9, Color.Lime);
             }
-            else if (pictureBox3.Tag == pictureBox5.Tag && pictureBox3.Tag == pictureBox7.Tag && pictureBox3.Tag != "")
+            else if (pictureBox3.Tag == pictureBox5.Tag && pictureBox3.Tag == pictureBox7.Tag && pictureBox3.Tag != string.Empty)
             {
                 ChangeCellColors(pictureBox3, pictureBox5, pictureBox7, Color.Lime);
             }
